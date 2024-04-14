@@ -1,0 +1,22 @@
+cabal-version:   3.0
+name:            graphiteApp
+version:         0.1.0.0
+license:         MIT
+license-file:    LICENSE
+author:          Axel Brisse
+maintainer:      axel.brisse@gmail.com
+build-type:      Simple
+extra-doc-files: CHANGELOG.md
+
+common warnings
+  ghc-options: -Wall
+
+executable graphiteApp
+  import:           warnings
+  main-is:          Main.hs
+  build-depends:
+    , base      ^>=4.17.2.1
+    , graphite  ^>=0.10
+
+  hs-source-dirs:   app
+  default-language: Haskell2010
