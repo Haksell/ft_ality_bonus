@@ -14,7 +14,6 @@ executable ft_ality_bonus
   build-depends:
     , base
     , directory
-    , fgl
     , filepath
     , graphviz
     , text
