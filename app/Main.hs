@@ -9,9 +9,6 @@ import qualified Data.Text.Lazy.IO as TL
 import System.Directory (doesFileExist, getSymbolicLinkTarget, listDirectory, pathIsSymbolicLink)
 import System.FilePath.Posix (normalise)
 
-rootDir :: String
-rootDir = "tmp"
-
 data VLabel
   = VLDirectory
   | VLSymlink
@@ -73,7 +70,7 @@ fileGraphParams =
 
 main :: IO ()
 main = do
-  (vs, es) <- readDirectoryGraph rootDir
+  (vs, es) <- readDirectoryGraph "tmp"
   let dotGraph = G.graphElemsToDot fileGraphParams vs es :: G.DotGraph FilePath
   let dotText = G.printDotGraph dotGraph :: TL.Text
   TL.writeFile "files.dot" dotText
