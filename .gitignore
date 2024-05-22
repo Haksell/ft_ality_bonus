@@ -1,1 +1,5 @@
 dist-newstyle
+.cabal-fmt*
+.nfs*
+*.png
+*.dot
