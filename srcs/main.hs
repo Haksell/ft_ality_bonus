@@ -38,6 +38,7 @@ appLoop renderer currentColor = do
   isQuitEvent :: SDL.Event -> Bool
   isQuitEvent event =
     case SDL.eventPayload event of
+      SDL.QuitEvent -> True
       SDL.WindowClosedEvent _ -> True
       SDL.KeyboardEvent keyboardEvent ->
         case SDL.keyboardEventKeyMotion keyboardEvent of
