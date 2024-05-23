@@ -1,3 +1,16 @@
+{-# LANGUAGE OverloadedStrings #-}
+
+module Main (main) where
+
+import qualified Common as C
+import qualified SDL
+
 main :: IO ()
-main = do
-  putStrLn "ooga"
+main = C.withSDL $
+  C.withWindow "Lesson 01" (640, 480) $
+    \w -> do
+      screen <- SDL.getWindowSurface w
+      SDL.surfaceFillRect screen Nothing (SDL.V4 maxBound maxBound maxBound maxBound)
+      SDL.updateWindowSurface w
+      SDL.delay 2000
+      SDL.freeSurface screen
