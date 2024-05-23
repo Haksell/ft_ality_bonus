@@ -32,19 +32,23 @@ appLoop renderer currentColor = do
   SDL.present renderer
   unless (any isQuitEvent events) $ appLoop renderer color
  where
+  getKeyPress :: SDL.KeyboardEventData -> SDL.Keycode
+  getKeyPress keyboardEvent = SDL.keysymKeycode $ SDL.keyboardEventKeysym keyboardEvent
+
   isQuitEvent :: SDL.Event -> Bool
   isQuitEvent event =
     case SDL.eventPayload event of
       SDL.WindowClosedEvent _ -> True
       SDL.KeyboardEvent keyboardEvent ->
         case SDL.keyboardEventKeyMotion keyboardEvent of
-          SDL.Pressed -> SDL.keysymKeycode (SDL.keyboardEventKeysym keyboardEvent) == SDL.KeycodeEscape
+          SDL.Pressed -> getKeyPress keyboardEvent == SDL.KeycodeEscape
           SDL.Released -> False
       _ -> False
+
   colorToggleEvent :: SDL.Event -> Bool
   colorToggleEvent event =
     case SDL.eventPayload event of
       SDL.KeyboardEvent keyboardEvent ->
         SDL.keyboardEventKeyMotion keyboardEvent == SDL.Pressed
-          && SDL.keysymKeycode (SDL.keyboardEventKeysym keyboardEvent) /= SDL.KeycodeEscape
+          && getKeyPress keyboardEvent /= SDL.KeycodeEscape
       _ -> False
