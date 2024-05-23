@@ -1,8 +1,6 @@
 cabal-version: 3.0
 name:          ft-ality-bonus
-version:       0.1.0.0
-author:        Axel Brisse
-maintainer:    axel.brisse@gmail.com
+version:       1
 build-type:    Simple
 
 common warnings
@@ -10,13 +8,12 @@ common warnings
 
 executable ft_ality_bonus
   import:           warnings
-  main-is:          Main.hs
+  main-is:          main.hs
+  hs-source-dirs:   srcs
+  default-language: Haskell2010
   build-depends:
     , base
     , directory
     , filepath
     , graphviz
     , text
-
-  hs-source-dirs:   app
-  default-language: Haskell2010
