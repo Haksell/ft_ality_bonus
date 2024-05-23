@@ -1,7 +1,5 @@
 {-# LANGUAGE OverloadedStrings #-}
 
-module Main where
-
 import Control.Monad (unless)
 import Data.Word (Word8)
 import qualified SDL
