@@ -3,28 +3,28 @@
 module Main where
 
 import Control.Monad (unless)
-import SDL
+import qualified SDL
 
 main :: IO ()
 main = do
-  initializeAll
-  window <- createWindow "My SDL Application" defaultWindow
-  renderer <- createRenderer window (-1) defaultRenderer
+  SDL.initializeAll
+  window <- SDL.createWindow "My SDL Application" SDL.defaultWindow
+  renderer <- SDL.createRenderer window (-1) SDL.defaultRenderer
   appLoop renderer
-  destroyWindow window
+  SDL.destroyWindow window
 
-appLoop :: Renderer -> IO ()
+appLoop :: SDL.Renderer -> IO ()
 appLoop renderer = do
-  events <- pollEvents
+  events <- SDL.pollEvents
   let isQuitEvent event =
-        case eventPayload event of
-          WindowClosedEvent _ -> True
-          KeyboardEvent keyboardEvent ->
-            case keyboardEventKeyMotion keyboardEvent of
-              Pressed -> keysymKeycode (keyboardEventKeysym keyboardEvent) == KeycodeEscape
-              Released -> False
+        case SDL.eventPayload event of
+          SDL.WindowClosedEvent _ -> True
+          SDL.KeyboardEvent keyboardEvent ->
+            case SDL.keyboardEventKeyMotion keyboardEvent of
+              SDL.Pressed -> SDL.keysymKeycode (SDL.keyboardEventKeysym keyboardEvent) == SDL.KeycodeEscape
+              SDL.Released -> False
           _ -> False
-  rendererDrawColor renderer $= V4 0 0 255 255
-  clear renderer
-  present renderer
+  SDL.rendererDrawColor renderer SDL.$= SDL.V4 0 0 255 255
+  SDL.clear renderer
+  SDL.present renderer
   unless (any isQuitEvent events) $ appLoop renderer
