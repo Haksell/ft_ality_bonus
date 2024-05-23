@@ -1,5 +1,5 @@
 dist-newstyle
-.cabal-fmt*
+build
+.cabal*
 .nfs*
-*.png
-*.dot
+__pycache__
